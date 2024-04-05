@@ -1,5 +1,8 @@
+require('dotenv').config()
+
 const express = require('express')
 const app = express()
+const Note = require('./models/note')
 
 const cors = require('cors')
 app.use(cors())
@@ -36,37 +39,8 @@ const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
 
-
 app.use(express.json())
 app.use(requestLogger)
-
-// Connecting to MongoDB
-const mongoose = require('mongoose')
-
-const password = process.argv[2]
-
-// DO NOT SAVE YOUR PASSWORD TO GITHUB!!
-const url =
-  `mongodb+srv://darwindsouzadd:${password}@cluster0.dxmmydf.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
-
-mongoose.set('strictQuery',false)
-mongoose.connect(url)
-
-const noteSchema = new mongoose.Schema({
-  content: String,
-  important: Boolean,
-})
-
-const Note = mongoose.model('Note', noteSchema)
-
-// rename id and remove _v
-noteSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
-    delete returnedObject._id
-    delete returnedObject.__v
-  }
-})
 
 // Routes
 app.get('/', (request, response) => {
@@ -129,7 +103,7 @@ app.post('/api/notes', (request, response) => {
 
 app.use(unknownEndpoint)
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
