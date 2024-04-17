@@ -4,3 +4,8 @@ npm install --save-dev nodemon
 npm run dev
 npm install cors
 brew install flyctl
+node --inspect index.js # chrome debugging for Node applications
+nodemon --inspect index.js # same as above
+npm install mongoose
+node mongo.js <password>
+npm install dotenv
