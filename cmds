@@ -9,3 +9,6 @@ nodemon --inspect index.js # same as above
 npm install mongoose
 node mongo.js <password>
 npm install dotenv
+npm install eslint --save-dev
+npx eslint --init
+npm install --save-dev @stylistic/eslint-plugin-js
