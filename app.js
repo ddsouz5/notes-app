@@ -5,7 +5,7 @@ const cors = require('cors')
 const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
-const mongoose = requre('mongoose')
+const mongoose = require('mongoose')
 
 mongoose.set('strictQuery', false)
 
