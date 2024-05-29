@@ -1,5 +1,5 @@
 const notesRouter = require('express').Router()
-const Note = require('../models/note')
+const Note = require('../models/note') 
 
 notesRouter.get('/', (request, response) => {
   Note.find({}).then(notes => {
@@ -56,4 +56,7 @@ notesRouter.put('/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
+
 module.exports = notesRouter
+
+
